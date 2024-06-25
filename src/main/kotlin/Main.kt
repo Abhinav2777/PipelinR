@@ -29,7 +29,9 @@ fun main() {
 
 
 //     Execute a command
-    val commandResult = pipeline.send(MyCommand("Jack"))
+    println("Enter name for Authorisation: ")
+    val input: String= readLine()!!.toString()
+    val commandResult = pipeline.send(MyCommand(input))
     println(commandResult)
 
 }
