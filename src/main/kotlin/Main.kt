@@ -22,7 +22,7 @@ fun main() {
     val pipeline: Pipeline = Pipelinr()
         .with(
             Command.Middlewares{
-                Stream.of(Logging(), Auth())
+                Stream.of(Authentication(), Authorization())
             }
         )
         .with(commandHandlers)
@@ -30,8 +30,10 @@ fun main() {
 
 //     Execute a command
     println("Enter name for Authorisation: ")
-    val input: String= readLine()!!.toString()
-    val commandResult = pipeline.send(MyCommand(input))
+    val input: String= readln()
+    println("Enter password for Authorisation: ")
+    val password: String = readln()
+    val commandResult = pipeline.send(MyCommand(input, password))
     println(commandResult)
 
 }

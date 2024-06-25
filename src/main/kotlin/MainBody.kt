@@ -16,5 +16,5 @@ fun mainBody(command: MyCommand): String {
     catch(e : Exception){
         logger.error("Encountered the exception ${e.message}")
     }
-    return "${command.data} is authorized to this code, finished main block"
+    return "${command.name} is authorized to this code, finished main block"
 }
