@@ -17,14 +17,13 @@ fun main() {
             MyCommandHandler(),
         )
     }
+    val middlewareHandlers = Command.Middlewares{
+        Stream.of(Authentication(), Authorization())
+    }
 
     // Initialize pipeline
     val pipeline: Pipeline = Pipelinr()
-        .with(
-            Command.Middlewares{
-                Stream.of(Authentication(), Authorization())
-            }
-        )
+        .with( middlewareHandlers)
         .with(commandHandlers)
 
 

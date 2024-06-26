@@ -20,26 +20,13 @@ class Authentication : Command.Middleware {
             }
         if (isAuthentic != null) {
             println("Authorization successful, moving to authorization")
-            return next?.invoke()
         } else {
             logger.error("Exiting..Authorization failed")
             System.exit(0)
         }
-        return null
+        return next?.invoke()
     }
 }
-
-//
-//class Logging : Command.Middleware {
-//    override fun <R : Any?, C : Command<R>?> invoke(command: C, next: Command.Middleware.Next<R>?): R? {
-//        println("Logging")
-//        val loggerLevel = Level.ERROR
-//        Configurator.setLevel(logger, loggerLevel)
-//        logger.info("The login level is set to $loggerLevel")
-//        return next?.invoke()
-//    }
-//}
-
 
 class Authorization : Command.Middleware {
     override fun <R : Any?, C : Command<R>?> invoke(command: C, next: Command.Middleware.Next<R>?): R? {
