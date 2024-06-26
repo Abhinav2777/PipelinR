@@ -12,15 +12,12 @@ class MyCommandHandler : Handler<MyCommand, String> {
 class Authentication : Command.Middleware {
     override fun <R : Any?, C : Command<R>?> invoke(command: C, next: Command.Middleware.Next<R>?): R? {
         println("Authorization is processing")
-        val uname = (command as MyCommand).name
+        val userid=(command as MyCommand).userId
         val upassword = (command as MyCommand).passwd
-        val isAuthentic = usersList
-            .find{
-                    it.name == uname && it.password==upassword
-            }
-        if (isAuthentic != null) {
-            println("Authorization successful, moving to authorization")
-            return next?.invoke()
+        if(userid in userList.keys && userList[userid]?.password==upassword ){
+             println("Authorization successful for the user ${userList[userid]?.name}, moving to authorization")
+
+             return next?.invoke()
         } else {
             logger.error("Exiting..Authorization failed")
             System.exit(0)
@@ -44,12 +41,9 @@ class Authentication : Command.Middleware {
 class Authorization : Command.Middleware {
     override fun <R : Any?, C : Command<R>?> invoke(command: C, next: Command.Middleware.Next<R>?): R? {
         println("Authorizing....")
-        val uname = (command as MyCommand).name
-        val upassword = (command as MyCommand).passwd
-        val urole = usersList
-            .find{
-                it.name == uname && it.password == upassword
-            }?.role
+        //Accessing directly through UserId Key
+        val userId = (command as MyCommand).userId
+        val urole = userList[userId]?.role
         when(urole) {
             "Dev" -> Configurator.setLevel(logger, Level.INFO)
             "Admin" -> Configurator.setLevel(logger, Level.TRACE)

@@ -1,6 +1,7 @@
 import java.lang.Exception
 
 fun mainBody(command: MyCommand): String {
+    val userId : String = (command as MyCommand).userId
     println("Executing the main logic.....")
 
     logger.debug("This is an Debug Message!")
@@ -16,5 +17,6 @@ fun mainBody(command: MyCommand): String {
     catch(e : Exception){
         logger.error("Encountered the exception ${e.message}")
     }
-    return "${command.name} is authorized to this code, finished main block"
+
+    return "${userList[userId]?.name} is authorized to this code, finished main block"
 }
