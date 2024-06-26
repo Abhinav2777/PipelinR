@@ -15,9 +15,9 @@ class Authentication : Command.Middleware {
         val userid=(command as MyCommand).userId
         val upassword = (command as MyCommand).passwd
         if(userid in userList.keys && userList[userid]?.password==upassword ){
-             println("Authorization successful for the user ${userList[userid]?.name}, moving to authorization")
+            println("Authorization successful for the user ${userList[userid]?.name}, moving to authorization")
 
-             return next?.invoke()
+            return next?.invoke()
         } else {
             logger.error("Exiting..Authorization failed")
             System.exit(0)
