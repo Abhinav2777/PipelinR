@@ -28,11 +28,11 @@ fun main() {
 
 
 //     Execute a command
-    println("Enter name for Authorisation: ")
-    val input: String= readln()
+    println("Enter User Id  for Authorization :")
+    val uid:String= readln()
     println("Enter password for Authorisation: ")
     val password: String = readln()
-    val commandResult = pipeline.send(MyCommand(input, password))
+    val commandResult = pipeline.send(MyCommand(uid, password))
     println(commandResult)
 
 }
