@@ -23,7 +23,7 @@ fun main() {
 
     // Initialize pipeline
     val pipeline: Pipeline = Pipelinr()
-        .with( middlewareHandlers)
+        .with(middlewareHandlers)
         .with(commandHandlers)
 
 

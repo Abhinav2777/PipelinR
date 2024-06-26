@@ -1,7 +1,7 @@
 import java.lang.Exception
 
 fun mainBody(command: MyCommand): String {
-    val userId : String = (command as MyCommand).userId
+    val userId : String = command.userId
     println("Executing the main logic.....")
 
     logger.debug("This is an Debug Message!")
